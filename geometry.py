@@ -35,3 +35,14 @@ class Cell():
             Line(self.bottom_left, self.bottom_right).draw(self.window.canvas, "black")
         if self.has_right_wall:
             Line(self.bottom_right, self.top_right).draw(self.window.canvas, "black")
+
+    def draw_move(self, to_cell, undo=False):
+        color = "red"
+        if undo:
+            color = "grey"
+        from_center = Point((self.top_left.x + self.bottom_right.x) / 2, 
+                            (self.top_left.y + self.bottom_right.y) / 2)
+        to_center = Point((to_cell.top_left.x + to_cell.bottom_right.x) / 2,
+                          (to_cell.top_left.y + to_cell.bottom_right.y) / 2)
+        move = Line(from_center, to_center)
+        move.draw(self.window.canvas, color)

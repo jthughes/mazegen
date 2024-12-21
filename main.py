@@ -21,6 +21,8 @@ def main():
     b = cells[3][5]
     b.has_top_wall = False
     b.has_bottom_wall = False
+    a.draw_move(b)
+    
 
     for row in cells:
         for cell in row:
