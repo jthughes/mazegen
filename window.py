@@ -6,7 +6,9 @@ class Window():
         self.__root: Tk = Tk()
         self.__root.title("Mazegen")
         self.__root.geometry(f"{width}x{height}")
-        self.canvas = Canvas(self.__root)
+        self.__root.minsize(width, height)
+        self.__root.maxsize(width, height)
+        self.canvas = Canvas(self.__root, width=width, height=height)
         self.canvas.pack()
         self.running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
@@ -26,5 +28,4 @@ class Window():
 
     def draw_line(self, line: Line, fill_color: str):
         line.draw(self.canvas, fill_color)
-    
     
