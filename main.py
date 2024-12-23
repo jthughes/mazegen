@@ -9,7 +9,7 @@ def main():
     win = Window(width, height)
     size = 30
     maze = Maze(size, size, (height // size) - 2 , (width // size) - 2, size, size, win)
-
+    maze.solve()
     win.wait_for_close()
 
 if __name__ == "__main__":
