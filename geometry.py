@@ -15,7 +15,7 @@ class Line():
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
 
 class Cell():
-    def __init__(self, left: int, right: int, top: int, bottom: int, window):
+    def __init__(self, left: int, right: int, top: int, bottom: int, window = None):
         self.top_left: Point = Point(left, top)
         self.bottom_left: Point = Point(left, bottom)
         self.bottom_right: Point = Point(right, bottom)
@@ -25,16 +25,22 @@ class Cell():
         self.has_right_wall: bool = True
         self.has_bottom_wall: bool = True
         self.window = window
+        self.visited = False
 
     def draw(self):
+        top_color = left_color = bottom_color = right_color = "#d9d9d9"
         if self.has_top_wall:
-            Line(self.top_left, self.top_right).draw(self.window.canvas, "black")
+            top_color = "black"
         if self.has_left_wall:
-            Line(self.top_left, self.bottom_left).draw(self.window.canvas, "black")
+            left_color = "black"
         if self.has_bottom_wall:
-            Line(self.bottom_left, self.bottom_right).draw(self.window.canvas, "black")
+            bottom_color = "black"
         if self.has_right_wall:
-            Line(self.bottom_right, self.top_right).draw(self.window.canvas, "black")
+            right_color = "black"
+        Line(self.top_left, self.top_right).draw(self.window.canvas, top_color)
+        Line(self.top_left, self.bottom_left).draw(self.window.canvas, left_color)
+        Line(self.bottom_left, self.bottom_right).draw(self.window.canvas, bottom_color)
+        Line(self.bottom_right, self.top_right).draw(self.window.canvas, right_color)
 
     def draw_move(self, to_cell, undo=False):
         color = "red"
